@@ -1,0 +1,90 @@
+Model: "Depthwise_model"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+reshape (Reshape)            (None, 1, 1000, 8)        0         
+_________________________________________________________________
+depthwise_conv2d (DepthwiseC (None, 1, 1000, 40)       640       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 1, 166, 40)        0         
+_________________________________________________________________
+spatial_dropout2d (SpatialDr (None, 1, 166, 40)        0         
+_________________________________________________________________
+depthwise_conv2d_1 (Depthwis (None, 1, 166, 120)       480       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 1, 33, 120)        0         
+_________________________________________________________________
+spatial_dropout2d_1 (Spatial (None, 1, 33, 120)        0         
+_________________________________________________________________
+conv2d (Conv2D)              (None, 1, 33, 8)          968       
+_________________________________________________________________
+spatial_dropout2d_2 (Spatial (None, 1, 33, 8)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 264)               0         
+_________________________________________________________________
+dense (Dense)                (None, 200)               53000     
+_________________________________________________________________
+dropout (Dropout)            (None, 200)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               20100     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 100)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 30)                3030      
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 30)                0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 30)                930       
+_________________________________________________________________
+reshape_1 (Reshape)          (None, 15, 2)             0         
+_________________________________________________________________
+up_sampling1d (UpSampling1D) (None, 30, 2)             0         
+_________________________________________________________________
+conv1d (Conv1D)              (None, 30, 8)             56        
+_________________________________________________________________
+up_sampling1d_1 (UpSampling1 (None, 60, 8)             0         
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 60, 8)             328       
+_________________________________________________________________
+conv1d_2 (Conv1D)            (None, 60, 2)             18        
+=================================================================
+Total params: 79,550
+Trainable params: 79,550
+Non-trainable params: 0
+_________________________________________________________________
+data_dir: C:\Users\hbkm9\Documents\Projects\CYB\Experiment3\Processed\NDMS01_Processed\Data
+window_size: 1000
+delay: 0
+gap_windows: None
+stride: 20
+freq_factor: 20
+file_names: ['Circles02.json', 'Circles03.json']
+feature_names: ('t_h_x', 't_h_y')
+channel_mask: ['Sensor 1.EMG1', 'Sensor 2.EMG2', 'Sensor 3.EMG3', 'Sensor 4.EMG4', 'Sensor 5.EMG5', 'Sensor 6.EMG6', 'Sensor 7.EMG7', 'Sensor 8.EMG8']
+dims: range(0, 60)
+time_step: 1
+preproc: <function norm_emg at 0x00000199792BADC8>
+batch_size: 64
+input_shape: (1000, 8)
+output_shape: 60
+acts: ('relu', 'selu', 'relu')
+krnl_in: ((1, 15), (1, 3))
+pad: same
+dil: ((1, 1), (1, 10))
+strides: ((1, 1), (1, 1))
+mpool: ((1, 6), (1, 5))
+depth_mul_in: (5, 3)
+l_norm: False
+feature_conv: 8
+drp: 0.2
+dense_drp: True
+dense: (200, 100, 30, 30)
+b_norm: False
+krnl_out: (3, 5)
+filters_out: (8, 8)
+max_queue_size: 64
+workers: 6
+verbose: 1
+epochs: 200
+patience: 5
+datagenerator: <class 'data_gen.ndms_datagenerator.NDMSDataGenerator'>

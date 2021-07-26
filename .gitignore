@@ -1,0 +1,5 @@
+CYB
+*.mp4
+*.bvh
+*.png
+__pycache__/
